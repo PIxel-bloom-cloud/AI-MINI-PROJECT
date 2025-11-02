@@ -1,0 +1,26 @@
+# AI Study Planner Prototype
+
+subjects = [
+    {"name": "Mathematics", "difficulty": 9, "performance": 3},
+    {"name": "Physics", "difficulty": 7, "performance": 5},
+    {"name": "English", "difficulty": 4, "performance": 8}
+]
+
+total_study_hours = 4
+priority_scores = []
+
+# Step 1: Calculate priority score (higher = more study time)
+for subj in subjects:
+    score = (subj["difficulty"] * (10 - subj["performance"])) / 100
+    priority_scores.append(score)
+
+# Step 2: Normalize study hours
+total_score = sum(priority_scores)
+for i, subj in enumerate(subjects):
+    subj["allocated_time"] = round((priority_scores[i] / total_score) * total_study_hours, 2)
+
+# Step 3: Display schedule
+print("Personalized Study Plan:\n")
+for subj in subjects:
+    print(f"{subj['name']} → {subj['allocated_time']} hours/day")
+
